@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { clients } from '../data-test/dashboard.json';
+---
+
+<Layout>
+  <div class="container">
+    <h1>ACA Submissions</h1>
+    {
+      clients.map((client) => (
+        <div>{client.name}</div>
+      ))
+    }
+  </div>
+</Layout>
+
+
+<style>
+
+</style>
