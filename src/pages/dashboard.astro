@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { clients } from '../data-test/dashboard.json';
+import ClientSubmissions from '../components/ClientSubmissions.astro';
 ---
 
 <Layout>
@@ -8,7 +9,7 @@ import { clients } from '../data-test/dashboard.json';
     <h1>ACA Submissions</h1>
     {
       clients.map((client) => (
-        <div>{client.name}</div>
+        <ClientSubmissions client={client} />
       ))
     }
   </div>

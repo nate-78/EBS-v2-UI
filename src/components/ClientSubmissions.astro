@@ -1,14 +1,50 @@
 ---
-  interface Props {
-    message: string;
-    count: number;
+  interface Person {
+    firstName: string;
+    lastName: string;
+  }
+  
+  interface AcaError {
+    errorMessage: string;
+    errorCode: string;
+    excelRow: number;
+    submissionRow: number;
+    lastName: string;
+    firstName: string;
+    coveredInd: Person;
+  }
+  
+  interface Submission {
+    submittedOn: string;
+    lastUpdatedOn: string;
+    receiptId: string;
+    numberOfRecords: number;
+    submissionType: string;
+    status: string;
+    errors: AcaError[];
   }
 
-  const { message, count } = Astro.props;
+  interface Client {
+    name: string;
+    submissions: Submission[];
+    isComplete: boolean;
+    taxYear: number;
+    originalSubmissionDate: string;
+    overallStatus: string;
+  }
+
+  interface Props {
+    client: Client;
+  }
+
+  const { client } = Astro.props;
 ---
 
 <article>
-
+  <h2>{client.name}</h2>
+  <p>Tax Year: {client.taxYear.toString()}</p>
+  <p>{client.overallStatus}</p>
+  <p>Initial Submission: {client.originalSubmissionDate}</p>
 </article>
 
 <style>

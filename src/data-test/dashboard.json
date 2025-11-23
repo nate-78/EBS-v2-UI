@@ -2,13 +2,17 @@
   "clients": [
     {
       "name": "ABC Company",
+      "taxYear": 2025,
+      "isComplete": false,
+      "originalSubmissionDate": "03/16/25 04:28 PM",
+      "overallStatus": "3 remaining 1095 errors",
       "submissions": [
         {
           "submittedOn": "03/16/25 04:28 PM",
           "lastUpdatedOn": "03/18/25 01:17 PM",
           "receiptId": "1094C-25-00001234",
           "numberOfRecords": 132,
-          "type": "Original",
+          "submissionType": "Original",
           "status": "Accepted with Errors",
           "errors": [
             {
