@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { clients } from '../../data-test/dashboard.json';
+import { taxYears } from '../../data-test/tax-years.json';
+import ClientSubmissions from '../../components/ClientSubmissions.astro';
+
+export async function getStaticPaths() {
+  
+  // get the most recent tax year
+  const activeYear = taxYears ? taxYears[0] : 0;
+
+  const paths = taxYears.map((year) => {
+    // NOTE: In the future, this is where you'd call the API for year-specific data
+    // const clientData = await fetchClientsForYear(year);
+    
+    return {
+      params: { 
+        taxYear: String(year) // Matches the [...taxYear] filename
+      },
+      // For this example, we'll just pass the whole dataset for any year, 
+      // but in a real app, this would be the data for the requested year.
+      props: { 
+        dashboardData: clients,
+        taxYear: year 
+      }
+    };
+  });
+
+  // --- 2. Add the base /dashboard path ---
+  // This handles the case where the user navigates to /dashboard
+  paths.push({
+    params: { 
+      taxYear: undefined // Matches the root path for rest parameters
+    },
+    props: { 
+      dashboardData: clients,
+      taxYear: activeYear // Default to the most recent year's data
+    }
+  });
+
+  return paths;
+}
+
+// --- Get the entries and year for the current page ---
+const { dashboardData, taxYear } = Astro.props;
+---
+
+<Layout>
+  <div class="container">
+    <div class="tax-years">
+      <ul>
+        {
+          taxYears.map((yr) => (
+            <li><a href={`/dashboard/${yr}`} class={yr === taxYear ? 'active' : ''}>{yr}</a></li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="submissions">
+      <h1>ACA Submissions - {taxYear}</h1>
+      {
+        dashboardData.map((client) => (
+          <ClientSubmissions client={client} />
+        ))
+      }
+    </div>
+    <div class="actions">
+
+    </div>
+  </div>
+</Layout>
+
+
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 1rem;
+  }
+  
+  .tax-years ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .tax-years li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .tax-years a {
+    text-decoration: none;
+    color: #333;
+    padding: 0.5rem;
+    display: block;
+    border-radius: 4px;
+  }
+  
+  .tax-years a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .tax-years a.active {
+    background-color: #007bff;
+    color: white;
+  }
+</style>

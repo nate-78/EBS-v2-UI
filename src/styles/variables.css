@@ -2,4 +2,14 @@
   --teal: #1597a4;
   --magenta: #e04f5f;
   --yellow: #efc84a;
+  --border-color-light: #ddd;
+  --border-color-dark: #333;
+  --text-color-light: #333;
+  --text-color-dark: #e7e7e7;
+  --background-color-light: #fff;
+  --background-color-dark: #232327;
+  --border-radius-card: 16px;
+  --border-radius-btn: 8px;
+  --box-shadow-light: 0 3px 6px rgba(0 0 0 / 30%);
+  --box-shadow-dark: 0 3px 6px #000;
 }

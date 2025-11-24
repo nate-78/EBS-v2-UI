@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { clients } from '../data-test/dashboard.json';
+import { taxYears } from '../data-test/tax-years.json';
+import ClientSubmissions from '../components/ClientSubmissions.astro';
+---
+
+<Layout>
+  <div class="container">
+    <div class="tax-years">
+      <ul>
+        {
+          taxYears.map((taxYear) => (
+            <li><a href={`/dashboard/${taxYear}`}>{taxYear}</a></li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="submissions">
+      <h1>ACA Submissions</h1>
+      {
+        clients.map((client) => (
+          <ClientSubmissions client={client} />
+        ))
+      }
+    </div>
+    <div class="actions">
+
+    </div>
+  </div>
+</Layout>
+
+
+<style>
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 1rem;
+  }
+</style>
