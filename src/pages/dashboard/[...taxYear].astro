@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { clients } from '../../data-test/dashboard.json';
 import { taxYears } from '../../data-test/tax-years.json';
 import ClientSubmissions from '../../components/ClientSubmissions.astro';
+import Plus from '../../components/icons/Plus.astro';
 
 export async function getStaticPaths() {
   
@@ -65,7 +66,10 @@ const { dashboardData, taxYear } = Astro.props;
       }
     </div>
     <div class="actions">
-
+      <button class="btn btn-primary">
+        <Plus />
+        New ACA Submission
+      </button>
     </div>
   </div>
 </Layout>
@@ -74,7 +78,7 @@ const { dashboardData, taxYear } = Astro.props;
 <style>
   .container {
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 5fr 2fr;
     gap: 1rem;
   }
   

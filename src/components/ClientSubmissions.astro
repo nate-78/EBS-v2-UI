@@ -1,4 +1,7 @@
 ---
+  import Check from './icons/Check.astro';
+  import CheckDashed from './icons/CheckDashed.astro';
+
   interface Person {
     firstName: string;
     lastName: string;
@@ -41,7 +44,13 @@
 ---
 
 <article class="client-record">
-  <h2>{client.name}</h2>
+  <div class="heading">
+    <h2>{client.name}</h2>
+    <span class:list={['status-icon', { complete: client.isComplete }]}>
+      {client.isComplete && <Check />}
+      {!client.isComplete && <CheckDashed />}
+    </span>
+  </div>
   <p>Tax Year: <span class="number">{client.taxYear.toString()}</span></p>
   <p>{client.overallStatus}</p>
   <p>Initial Submission: <span class="number">{client.originalSubmissionDate}</span></p>
@@ -55,8 +64,23 @@
     box-shadow: var(--box-shadow);
     margin-bottom: 1.5rem;
   }
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
   h2 {
-    margin-top: 0;
+    margin-block: 0;
     color: var(--teal);
+  }
+  .status-icon :global(svg) {
+    width: 1.5rem;
+  }
+  .status-icon.complete > :global(svg > path:first-child) {
+    fill: var(--teal);
+  }
+  .status-icon.complete > :global(svg > path:last-child) {
+    stroke: white;
   }
 </style>

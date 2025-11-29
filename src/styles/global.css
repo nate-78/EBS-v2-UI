@@ -21,6 +21,11 @@
 
 * {
   box-sizing: border-box;
+  font-family: var(--body-text);
+  color: var(--text-color);
+}
+*:focus-visible {
+  outline: 2px solid var(--teal);
 }
 html, body {
   margin: 0;
@@ -37,6 +42,36 @@ html, body {
   margin-inline: auto;
 }
 
-.number {
-  font-family: var(--number-text);
+.number, .number * {
+  font-family: var(--number-text)!important;
 }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--yellow);
+  border: 2px solid var(--text-color);
+  border-radius: var(--border-radius-btn);
+  font-weight: 500;
+  transition: background .3s;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+.btn-primary {
+  background: var(--yellow);
+  border-color: var(--text-color);
+  color: var(--text-color);
+}
+.btn:hover, .btn-primary:hover {
+  background: color-mix(in srgb, var(--yellow), black 10%);
+}
+
+.btn svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: .5rem;
+  stroke-width: 2;
+}
+
