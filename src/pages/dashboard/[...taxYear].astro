@@ -48,7 +48,7 @@ const { dashboardData, taxYear } = Astro.props;
 <Layout>
   <div class="container">
     <div class="tax-years">
-      <ul>
+      <ul class="number">
         {
           taxYears.map((yr) => (
             <li><a href={`/dashboard/${yr}`} class={yr === taxYear ? 'active' : ''}>{yr}</a></li>
@@ -57,7 +57,7 @@ const { dashboardData, taxYear } = Astro.props;
       </ul>
     </div>
     <div class="submissions">
-      <h1>ACA Submissions - {taxYear}</h1>
+      <h1>ACA Submissions &mdash; <span class="number">{taxYear}</span></h1>
       {
         dashboardData.map((client) => (
           <ClientSubmissions client={client} />

@@ -12,4 +12,6 @@
   --border-radius-btn: 8px;
   --box-shadow-light: 0 3px 6px rgba(0 0 0 / 30%);
   --box-shadow-dark: 0 3px 6px #000;
+  --body-text: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --number-text: 'RobotoMono', fixed-width;
 }

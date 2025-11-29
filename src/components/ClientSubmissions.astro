@@ -42,9 +42,9 @@
 
 <article class="client-record">
   <h2>{client.name}</h2>
-  <p>Tax Year: {client.taxYear.toString()}</p>
+  <p>Tax Year: <span class="number">{client.taxYear.toString()}</span></p>
   <p>{client.overallStatus}</p>
-  <p>Initial Submission: {client.originalSubmissionDate}</p>
+  <p>Initial Submission: <span class="number">{client.originalSubmissionDate}</span></p>
 </article>
 
 <style>
