@@ -1,6 +1,7 @@
 ---
   import Check from './icons/Check.astro';
   import CheckDashed from './icons/CheckDashed.astro';
+  import Tooltip from './Tooltip.astro';
 
   interface Person {
     firstName: string;
@@ -46,10 +47,12 @@
 <article class="client-record">
   <div class="heading">
     <h2>{client.name}</h2>
-    <span class:list={['status-icon', { complete: client.isComplete }]}>
-      {client.isComplete && <Check />}
-      {!client.isComplete && <CheckDashed />}
-    </span>
+    <div class:list={['status-icon', { complete: client.isComplete }]}>
+      <Tooltip message="Mark this submission complete?">
+        {client.isComplete && <Check />}
+        {!client.isComplete && <CheckDashed />}
+      </Tooltip>
+    </div>
   </div>
   <p>Tax Year: <span class="number">{client.taxYear.toString()}</span></p>
   <p>{client.overallStatus}</p>
