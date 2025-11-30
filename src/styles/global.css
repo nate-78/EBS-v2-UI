@@ -75,3 +75,15 @@ html, body {
   stroke-width: 2;
 }
 
+.flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+.flex.col {
+  flex-direction: column;
+  gap: 0;
+  align-items: flex-start;
+}
+

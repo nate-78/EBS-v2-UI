@@ -34,6 +34,7 @@
     isComplete: boolean;
     taxYear: number;
     originalSubmissionDate: string;
+    originalRecordsNum: number;
     overallStatus: string;
   }
 
@@ -46,7 +47,10 @@
 
 <article class="client-record">
   <div class="heading">
-    <h2>{client.name}</h2>
+    <div class="flex">
+      <h2>{client.name}</h2>
+      <p>Tax Year: <span class="number">{client.taxYear.toString()}</span></p>
+    </div>
     <div class:list={['status-icon', { complete: client.isComplete }]}>
       <Tooltip message="Mark this submission complete?">
         {client.isComplete && <Check />}
@@ -54,9 +58,15 @@
       </Tooltip>
     </div>
   </div>
-  <p>Tax Year: <span class="number">{client.taxYear.toString()}</span></p>
-  <p>{client.overallStatus}</p>
-  <p>Initial Submission: <span class="number">{client.originalSubmissionDate}</span></p>
+  <div class="details">
+    <p class="flex col">
+      Initial Submission: <span class="number">{client.originalSubmissionDate}</span>
+    </p>
+    <p class="flex col">
+      Records Count: <span class="number">{client.originalRecordsNum}</span>
+    </p>
+    <p class:list={['status', { complete: client.isComplete }]}>{client.overallStatus}</p>
+  </div>
 </article>
 
 <style>
@@ -85,5 +95,20 @@
   }
   .status-icon.complete > :global(svg > path:last-child) {
     stroke: white;
+  }
+  p {
+    margin: 0;
+  }
+  .details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+  }
+  .status {
+    font-weight: 600;
+    color: var(--magenta);
+  }
+  .status.complete {
+    color: var(--teal);
   }
 </style>
