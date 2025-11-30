@@ -1,0 +1,22 @@
+---
+  import type { AcaError } from "../types";
+
+  interface Props {
+    error: AcaError
+  }
+
+  const { error } = Astro.props;
+  let coveredIndividualName = "";
+  if (error.coveredInd) {
+    coveredIndividualName = `${error.coveredInd.firstName} ${error.coveredInd.lastName}`;
+  }
+---
+
+<tr>
+  <td class="number">{error.errorCode}</td>
+  <td>{error.errorMessage}</td>
+  <td>{error.lastName}, {error.firstName}</td>
+  <td class="number">{error.excelRow}</td>
+  <td class="number">{error.submissionRow}</td>
+  <td>{coveredIndividualName}</td>
+</tr>

@@ -50,6 +50,49 @@
               "coveredInd": null
             }
           ]
+        },
+        {
+          "submittedOn": "03/18/25 02:17 PM",
+          "lastUpdatedOn": "03/19/25 03:37 PM",
+          "receiptId": "1094C-25-00001235",
+          "numberOfRecords": 3,
+          "submissionType": "Correction",
+          "status": "Accepted with Errors",
+          "errors": [
+            {
+              "errorMessage": "The Information Return \"CoveredIndividualName\" and \"SSN\" within \"CoveredIndividualGrp\" must match the IRS database.",
+              "errorCode": "Shared-008",
+              "excelRow": 37,
+              "submissionRow": 20,
+              "lastName": "Harper",
+              "firstName": "Benjamin",
+              "coveredInd": {
+                "firstName": "Isaak",
+                "lastName": "Harper"
+              }
+            },
+            {
+              "errorMessage": "The Information Return \"CoveredIndividualName\" and \"SSN\" within \"CoveredIndividualGrp\" must match the IRS database.",
+              "errorCode": "Shared-008",
+              "excelRow": 55,
+              "submissionRow": 38,
+              "lastName": "Simmons",
+              "firstName": "John",
+              "coveredInd": {
+                "firstName": "Peter",
+                "lastName": "Simmons"
+              }
+            },
+            {
+              "errorMessage": "Form 1095C \"OtherCompletePersonName\" and \"SSN\" in \"EmployeeInfoGrp\" must match IRS database.",
+              "errorCode": "1095C-010-01",
+              "excelRow": 56,
+              "submissionRow": 39,
+              "lastName": "Stahl",
+              "firstName": "Reginald",
+              "coveredInd": null
+            }
+          ]
         }
       ]
     }
