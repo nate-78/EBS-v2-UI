@@ -1,0 +1,56 @@
+---
+import type { AcaError, Submission } from '../types';
+import Chevron from './icons/Chevron.astro';
+
+interface Props {
+  submission: Submission
+}
+
+const { submission } = Astro.props;
+---
+
+<div class="submission-row flex space-between">
+  <p class="number">{submission.submittedOn}</p>
+  <p class="number"><strong>{submission.receiptId}</strong></p>
+  <p>{submission.submissionType}</p>
+  <p class="number">{submission.numberOfRecords}</p>
+  <p>{submission.status}</p>
+  <a href="#" class="show-errors"><Chevron /></a>
+  <div class:list={["errors", {hidden: !submission.errors}]}>
+    <!-- errors will go here -->
+  </div>
+</div>
+
+<style>
+  p {
+    margin: 0;
+  }
+  .show-errors {
+    transition: .3s;
+    rotate: 0deg;
+    position: relative;
+    top: 0;
+  }
+  .show-errors.open {
+    rotate: 180deg;
+    top: -5px;
+  }
+  .errors {
+    height: 0;
+    overflow: hidden;
+  }
+  .hidden {
+    visibility: hidden;
+  }
+</style>
+
+<script type="text/javascript">
+  const btns = document.querySelectorAll('.show-errors');
+  btns.forEach((btn) => {
+    btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      btn.classList.toggle('open');
+    });
+  });
+</script>

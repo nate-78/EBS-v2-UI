@@ -51,9 +51,15 @@
     top: -5px;
     left: calc(50% - 3px);
   }
+  @media (prefers-color-scheme: dark) {
+    .tooltip::after {
+      border-bottom: 6px solid var(--text-color-dark);
+      top: -6px;
+    }
+  }
 </style>
 
-<script lang="JavaScript">
+<script type="text/javascript">
   const tooltips = document.querySelectorAll('.tooltip');
   tooltips.forEach(tooltip => {
     const width = tooltip.clientWidth;

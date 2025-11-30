@@ -2,41 +2,8 @@
   import Check from './icons/Check.astro';
   import CheckDashed from './icons/CheckDashed.astro';
   import Tooltip from './Tooltip.astro';
-
-  interface Person {
-    firstName: string;
-    lastName: string;
-  }
-  
-  interface AcaError {
-    errorMessage: string;
-    errorCode: string;
-    excelRow: number;
-    submissionRow: number;
-    lastName: string;
-    firstName: string;
-    coveredInd: Person;
-  }
-  
-  interface Submission {
-    submittedOn: string;
-    lastUpdatedOn: string;
-    receiptId: string;
-    numberOfRecords: number;
-    submissionType: string;
-    status: string;
-    errors: AcaError[];
-  }
-
-  interface Client {
-    name: string;
-    submissions: Submission[];
-    isComplete: boolean;
-    taxYear: number;
-    originalSubmissionDate: string;
-    originalRecordsNum: number;
-    overallStatus: string;
-  }
+  import type { Client } from '../types.ts';
+import SubmissionDetail from './SubmissionDetail.astro';
 
   interface Props {
     client: Client;
@@ -66,6 +33,14 @@
       Records Count: <span class="number">{client.originalRecordsNum}</span>
     </p>
     <p class:list={['status', { complete: client.isComplete }]}>{client.overallStatus}</p>
+  </div>
+  <div class="submissions">
+    <h3>Submissions</h3>
+    {
+      client.submissions.map((sub) => (
+        <SubmissionDetail submission={sub} />
+      ))
+    }
   </div>
 </article>
 
