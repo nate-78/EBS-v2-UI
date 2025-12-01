@@ -2,6 +2,7 @@
 import type { AcaError, Submission } from '../types';
 import ErrorDetail from './ErrorDetail.astro';
 import Chevron from './icons/Chevron.astro';
+import FileXml from './icons/FileXml.astro';
 
 interface Props {
   submission: Submission
@@ -15,7 +16,7 @@ const { submission } = Astro.props;
     <p class="number">{submission.submittedOn}</p>
     <p class="number"><strong>{submission.receiptId}</strong></p>
     <p>{submission.submissionType}</p>
-    <p class="number">{submission.numberOfRecords}</p>
+    <p class="has-icon"><span class="number">{submission.numberOfRecords}</span> <FileXml /></p>
     <p>{submission.status}</p>
     <a href="#" class="show-errors"><Chevron /></a>
   </div>
@@ -55,6 +56,15 @@ const { submission } = Astro.props;
   }
   p {
     margin: 0;
+  }
+  p.has-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  p.has-icon :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
   }
   .show-errors {
     transition: .3s;
