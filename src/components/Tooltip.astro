@@ -65,7 +65,6 @@
   tooltips.forEach(tooltip => {
     const width = tooltip.clientWidth;
     const wrapperWidth = tooltip.parentElement.clientWidth;
-    console.log(width, wrapperWidth);
     tooltip.style.left = (-0.5 * width) + (0.5 * wrapperWidth) - 3 + "px";
   });
 

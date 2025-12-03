@@ -1,15 +1,40 @@
+---
+import SiteNav from "./SiteNav.astro";
+---
+
 <header>
-  <div class="content">
-    <a href="/" class="logo"></a>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">ACA Filing</a>
-        </li>
-        <li>
-          <a href="#">PDF Generation</a>
-        </li>
-      </ul>
-    </nav>
+  <div class="container">
+    <a href="/dashboard" class="logo">
+      <img src="/ebs-logo-teal.png" /> 
+    </a>
+    <SiteNav />
   </div>
 </header>
+
+<style>
+  header {
+    margin-bottom: 2rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    display: block;
+    width: 145px;
+    background-image: url('/ebs-logo-teal.png');
+    background-size: contain;
+  }
+  .logo img {
+    max-width: 100%;
+    visibility: hidden;
+  }
+  @media (prefers-color-scheme: dark) {
+    .logo {
+      background-image: url('/ebs-logo-white.png');
+    }
+  }
+</style>
