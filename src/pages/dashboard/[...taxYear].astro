@@ -79,8 +79,9 @@ const { dashboardData, taxYear } = Astro.props;
   .container {
     display: grid;
     /* grid-template-columns: 1fr 5fr 2fr; */
-    grid-template-columns: 1fr 970px 2fr;
-    gap: 1rem;
+    /* grid-template-columns: 1fr 970px 2fr; */
+    grid-template-columns: 60px 1fr 190px;
+    gap: 2rem;
   }
   
   .tax-years ul {
@@ -107,5 +108,11 @@ const { dashboardData, taxYear } = Astro.props;
   .tax-years a.active {
     background-color: #007bff;
     color: white;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
   }
 </style>
