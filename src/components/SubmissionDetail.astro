@@ -3,6 +3,8 @@ import type { AcaError, Submission } from '../types';
 import ErrorDetail from './ErrorDetail.astro';
 import Chevron from './icons/Chevron.astro';
 import FileXml from './icons/FileXml.astro';
+import Plus from './icons/Plus.astro';
+import Tooltip from './Tooltip.astro';
 
 interface Props {
   submission: Submission
@@ -18,6 +20,9 @@ const { submission } = Astro.props;
     <p>{submission.submissionType}</p>
     <p class="has-icon"><span class="number">{submission.numberOfRecords}</span> <FileXml /></p>
     <p>{submission.status}</p>
+    <Tooltip message="File a correction or replacement for this submission?">
+      <button type="button" class="add-correction"><Plus /></button>
+    </Tooltip>
     <a href="#" class="show-errors"><Chevron /></a>
   </div>
   <div class:list={["errors", {hidden: !submission.errors}]}>
@@ -84,6 +89,23 @@ const { submission } = Astro.props;
   }
   .hidden {
     visibility: hidden;
+  }
+  .add-correction {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    padding: 0; 
+    background: var(--yellow);
+    border-radius: 100%;
+    cursor: pointer;
+  }
+  .add-correction :global(svg) {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-color-light);
+  }
+  .add-correction:hover {
+    background: color-mix(in srgb, var(--yellow), black 10%);
   }
 </style>
 
