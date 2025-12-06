@@ -1,31 +1,36 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { clients } from '../../data-test/dashboard.json';
-import { taxYears } from '../../data-test/tax-years.json';
+// import { taxYears } from '../../data-test/tax-years.json';
+import { fetchClientsForYear, fetchSubmittedTaxYears } from '../../api/aca.js';
 import ClientSubmissions from '../../components/ClientSubmissions.astro';
 import Plus from '../../components/icons/Plus.astro';
 
 export async function getStaticPaths() {
+
+  const taxYears = await fetchSubmittedTaxYears();
   
   // get the most recent tax year
   const activeYear = taxYears ? taxYears[0] : 0;
 
-  const paths = taxYears.map((year) => {
+  const paths = await Promise.all(taxYears.map(async (year) => {
     // NOTE: In the future, this is where you'd call the API for year-specific data
-    // const clientData = await fetchClientsForYear(year);
+    const clientData = await fetchClientsForYear('2024');
+    console.log(clientData);
     
     return {
-      params: { 
+      params: {
         taxYear: String(year) // Matches the [...taxYear] filename
       },
-      // For this example, we'll just pass the whole dataset for any year, 
+      // For this example, we'll just pass the whole dataset for any year,
       // but in a real app, this would be the data for the requested year.
-      props: { 
+      props: {
         dashboardData: clients,
-        taxYear: year 
+        selectedTaxYear: year,
+        taxYears: taxYears
       }
     };
-  });
+  }));
 
   // --- 2. Add the base /dashboard path ---
   // This handles the case where the user navigates to /dashboard
@@ -35,7 +40,8 @@ export async function getStaticPaths() {
     },
     props: { 
       dashboardData: clients,
-      taxYear: activeYear // Default to the most recent year's data
+      selectedTaxYear: activeYear, // Default to the most recent year's data
+      taxYears: taxYears
     }
   });
 
@@ -43,7 +49,7 @@ export async function getStaticPaths() {
 }
 
 // --- Get the entries and year for the current page ---
-const { dashboardData, taxYear } = Astro.props;
+const { dashboardData, selectedTaxYear, taxYears } = Astro.props;
 ---
 
 <Layout>
@@ -52,13 +58,13 @@ const { dashboardData, taxYear } = Astro.props;
       <ul class="number">
         {
           taxYears.map((yr) => (
-            <li><a href={`/dashboard/${yr}`} class={yr === taxYear ? 'active' : ''}>{yr}</a></li>
+            <li><a href={`/dashboard/${yr}`} class={yr === selectedTaxYear ? 'active' : ''}>{yr}</a></li>
           ))
         }
       </ul>
     </div>
     <div class="submissions">
-      <h1>ACA Submissions &mdash; <span class="number">{taxYear}</span></h1>
+      <h1>ACA Submissions &mdash; <span class="number">{selectedTaxYear}</span></h1>
       {
         dashboardData.map((client) => (
           <ClientSubmissions client={client} />
